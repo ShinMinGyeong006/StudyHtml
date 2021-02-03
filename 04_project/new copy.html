@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Interest</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="css/init.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/desines.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script>
+        // 로드 이벤트
+        $(document).ready(function () {
+            // 풀다운 메뉴 적용
+            $(".outer-menu").hover(function () {
+                $(this).find(".inner-menu").css('display', "block");
+            }, function () {
+                $(this).find(".inner-menu").css('display', "none");
+            });
+
+            // 그리드 레이아웃, 이미지 자동로드 적용
+            $("#main-section").imagesLoaded(function () {
+                $("#main-section").masonry({
+                    itemSelector: ".paper",
+                    columnWidth: 230
+                });
+            });
+
+            // 라이트박스
+            $(".paper").click(function() { showLightBox(); });
+            $("#darken-background").click(function() { hideLightBox(); });
+            // 라이트박스이벤트 서포트 // 하얀영역을 클릭해도 라이트박스꺼지는 걸 방지
+            $("#lightbox").click(function (event) {
+               event.stopPropagation();
+            });
+        });
+
+        function showLightBox() {
+            $("#random-image").attr({
+                src: function() {
+                    var rnd_height = 500 + Math.floor(Math.random() * 100);
+                    return "https://placekitten.com/600/" + rnd_height;
+                }
+            });
+            $("#darken-background").show();
+            $("#darken-background").css("top", $(window).scrollTop());
+            $("body").css('overflow', 'hidden');
+        }
+
+        function hideLightBox() {
+            $("#darken-background").hide();
+            $("body").css('overflow', 'auto'); // 정확
+        }
+    </script>
+</head>
+
+<body>
+    <header id="main-header">
+        <div class="header-search-form">
+            <form>
+                <input type="search" class="input-search">
+                <input type="submit" class="input-submit" value="검색">
+            </form>
+        </div>
+        <h1 class="header-title">Interest</h1>
+        <div class="header-menu">
+            <ul class="outer-menu">
+                <li>
+                    <a href="#">정보</a>
+                    <ul class="inner-menu">
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="outer-menu">
+                <li>
+                    <a href="#">사용자</a>
+                    <ul class="inner-menu">
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <nav id="main-navigation">
+        <ul>
+            <li><a href="#">Following</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Everything</a></li>
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Gift</a></li>
+        </ul>
+    </nav>
+    <section id="main-section">
+        <!-- 페이퍼 여러번 복사할 것(나중에) -->
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placeimg.com/340/480/animals?t=1612339506680"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="data:image/jpeg;base64,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">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit consequuntur asperiores odit laboriosam, libero, beatae numquam natus ipsum veritatis vitae voluptatem impedit incidunt, quidem nam ratione. Impedit voluptatem nulla sequi!</p>
+            </div>
+        </div>
+        <!-- 페이퍼 끝 -->
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/290"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/200"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/215"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placedog.net/125/200"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/249"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/186"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/181"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/208"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/300"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/169"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/168"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/211"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/209"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/198"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/306"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/305"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/300"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placekitten.com/190/299"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+        <div class="paper">
+            <div class="paper-holder">
+                <a><img width="190" src="https://placeimg.com/640/480/animals"></a>
+            </div>
+            <p class="paper-description">Lorem ipsum dolor sit amet</p>
+            <div class="paper-content">
+                <a class="paper-link" href="#">
+                    <img src="https://placekitten.com/30/30">
+                </a>
+                <p class="paper-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure velit repudiandae aliquam commodi, qui eum porro magnam vitae rerum sapiente maiores nesciunt earum facere deserunt unde et provident aliquid sed?</p>
+            </div>
+        </div>
+    </section>
+    <div id="darken-background">
+        <div id="lightbox">
+            <div class="user-information">
+                <a class="user-information-image" href="#">
+                    <img src="https://placekitten.com/70/70">
+                </a>
+                <div class="user-information-text">
+                    <h3>User</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus inventore, et eum quisquam voluptatem illo quos, cum iure sunt non id culpa, dolores fugiat? Et odit necessitatibus quod mollitia labore.</p>
+                </div>
+            </div>
+            <hr class="lightbox-splitter">
+            <img id="random-image" src="https://placekitten.com/600/751">
+        </div>
+    </div>
+    <footer id="main-footer"></footer>
+</body>
+</html>
